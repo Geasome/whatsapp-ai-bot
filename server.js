@@ -9,8 +9,17 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("WhatsApp AI Bot çalışıyor.");
 });
+app.get("/webhook", (req, res) => {
+  const mode = req.query["hub.mode"];
+  const token = req.query["hub.verify_token"];
+  const challenge = req.query["hub.challenge"];
 
-app.post("/webhook", async (req, res) => {
+  if (mode === "subscribe" && token === process.env.VERIFY_TOKEN) {
+    return res.status(200).send(challenge);
+  }
+
+  res.sendStatus(403);
+});app.post("/webhook", async (req, res) => {
   try {
     console.log(JSON.stringify(req.body, null, 2));
 
