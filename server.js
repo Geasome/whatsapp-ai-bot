@@ -33,7 +33,7 @@ app.get("/webhook", (req, res) => {
     const from = message.from;
     const text = message.text?.body;
 
-    const aiReply = let aiReply = "";
+   let aiReply = "";
 
 if (text === "1") {
   aiReply = "📅 Randevu almak için adınızı ve istediğiniz tarihi yazın.";
