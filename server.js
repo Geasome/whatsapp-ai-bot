@@ -33,8 +33,32 @@ app.get("/webhook", (req, res) => {
     const from = message.from;
     const text = message.text?.body;
 
-    const aiReply = `Mesajını aldım: ${text}`;
+    const aiReply = let aiReply = "";
 
+if (text === "1") {
+  aiReply = "📅 Randevu almak için adınızı ve istediğiniz tarihi yazın.";
+}
+else if (text === "2") {
+  aiReply = "💄 Kirpik Lifting: 500 TL\n💅 Kalıcı Oje: 400 TL\n👁️ İpek Kirpik: 1200 TL";
+}
+else if (text === "3") {
+  aiReply = "🎉 Bu ay tüm cilt bakımlarında %20 indirim!";
+}
+else if (text === "4") {
+  aiReply = "🕘 Çalışma Saatleri:\nPazartesi-Cumartesi 09:00-20:00";
+}
+else {
+  aiReply = `
+Merhaba 🌸
+
+1️⃣ Randevu Al
+2️⃣ Fiyat Bilgisi
+3️⃣ Kampanyalar
+4️⃣ Çalışma Saatleri
+
+Lütfen bir numara seçin.
+`;
+}
     await axios.post(
       `https://graph.facebook.com/v22.0/${process.env.PHONE_NUMBER_ID}/messages`,
       {
